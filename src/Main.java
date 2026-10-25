@@ -1,27 +1,39 @@
-import config.MyWorldConfig;
+import config.SimulationConfig;
+import model.Island;
+import model.animal.Animal;
+import service.SimulationService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+
 
 public class Main {
-    static void main() {
 
-        MyWorldConfig config = new MyWorldConfig();
-        HashMap<String, Integer> animalMap = config.maxQuantityAnimal();
-        ArrayList<String> animalList = new ArrayList<>();
-        int i=0;
-        for (String key: animalMap.keySet())
-        {
-            animalList.add(i,key);
-            i++;
-        }
-        System.out.println(animalList);
-        int s = animalMap.get(animalList.get(1));
-        System.out.println(s);
-        for (int j = 0; j < s; j++) {
+    public static void main(String[] args) {
+        System.out.println("=== Остров ОСТАТЬСЯ В ЖИВЫХ ===\n");
 
+        // Создаём остров
+        Island island = new Island(SimulationConfig.ISLAND_X, SimulationConfig.ISLAND_Y);
+        System.out.println("Создали остров: " + island);
 
-        }
+        // Генерируем растения
 
+        island.generatePlants(
+            SimulationConfig.PLANTS_MIN_PER_CELL,
+            SimulationConfig.PLANTS_MAX_PER_CELL
+        );
+        System.out.println("Засеяли ганджубас");
+
+        // Создаём начальных животных
+        List<Animal> initialAnimals = SimulationConfig.createInitialAnimals();
+        System.out.println("Создано " + initialAnimals.size() + " животных");
+
+        // Размещаем животных на острове
+        island.populateAnimals(initialAnimals);
+        System.out.println("Заселили животных\n");
+
+        //
+        // Запускаем симуляцию
+        SimulationService simulation = new SimulationService(island);
+        simulation.start();
     }
 }
