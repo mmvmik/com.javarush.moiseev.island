@@ -46,7 +46,7 @@ public class Island {
                 }
             }
             if (!added) {
-                System.err.println("Cannot place animal: " + animal.getName());
+                System.err.println("Не могу разместить животных: " + animal.getName());
             }
         }
     }
@@ -98,6 +98,6 @@ public class Island {
 
     @Override
     public String toString() {
-        return String.format("Island(%dx%d)", rows, cols);
+        return String.format("Остров(%dx%d)", rows, cols);
     }
 }

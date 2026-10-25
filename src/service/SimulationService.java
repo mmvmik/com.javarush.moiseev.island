@@ -169,7 +169,7 @@ public class SimulationService {
             animalExecutor.shutdownNow();
             Thread.currentThread().interrupt();
         }
-        System.out.println("Simulation stopped after " + tick + " ticks.");
+        System.out.println("Симуляция остановлена после " + tick + " дней.");
     }
 
     public int getTick() {
